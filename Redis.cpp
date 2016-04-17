@@ -16,6 +16,7 @@ Redis::Redis() {
 
 Redis::~Redis() {
 	// TODO Auto-generated destructor stub
+	freeReplyObject(this->_reply);
 	this->_connect = NULL;
 	this->_reply = NULL;
 }
@@ -31,11 +32,21 @@ bool Redis::connect(std::string host, int port)
     return 1;
   }
 
+void Redis::set_auth(std::string password)
+{
+this->_reply = (redisReply*)redisCommand(this->_connect, "AUTH %s", password.c_str());
+if (this->_reply ->type == REDIS_REPLY_ERROR) {
+    /* Authentication failed */
+	std::cout<<"authentication failed!"<<std::endl;
+}
+std::string str = this->_reply->str;
+}
+
     std::string Redis::get(std::string key)
   {
     this->_reply = (redisReply*)redisCommand(this->_connect, "GET %s", key.c_str());
     std::string str = this->_reply->str;
-    freeReplyObject(this->_reply);
+   // freeReplyObject(this->_reply);
     return str;
   }
 

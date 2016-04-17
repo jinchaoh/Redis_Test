@@ -15,6 +15,7 @@ int main()
     printf("connect error!\n");
     return 0;
   }
+  r->set_auth("hankin");
   r->set("name", "Mayuyu");
   int i;
   char buf[10];

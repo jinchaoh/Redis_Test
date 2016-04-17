@@ -25,6 +25,7 @@ public:
 	std::string get(std::string key);
 	void set(std::string key, std::string value);
 	void lpush(std::string list_mem, std::string value);
+	void set_auth(std::string password);
 
 private:
 	redisContext* _connect;
