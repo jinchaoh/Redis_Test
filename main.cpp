@@ -15,14 +15,14 @@ int main()
     printf("connect error!\n");
     return 0;
   }
-  r->set_auth("hankin");
+  //r->set_auth("hankin");
   r->set("name", "Mayuyu");
   int i;
   char buf[10];
   std::string str;
   for(i=0;i<100;i++)
   {
-	  sprintf(buf,"%d",i);
+	  sprintf(buf,"%d",i+1000);
 	  str = buf;
 	  r->lpush("mylist",str);
   }
